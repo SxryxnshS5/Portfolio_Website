@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vertical Menu with Sticky Footer</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <link href="static/css/style.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Azeret+Mono:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+<!-- Contains elements for the background-->
+<div class="con">
+  <div class="shoots">
+      <div class="shoot"></div>
+      <div class="shoot"></div>
+      <div class="shoot"></div>
+      <div class="shoot"></div>
+  </div>
+  <div class="stars"></div>
+</div>
+
+<!--Sidebar/Menu_bar-->
+<div class="wrapper">
+  <div class="sidebar">
+    <ul class="nav flex-column nav-grp">
+      <li class="nav-item">
+        <a class="nav-link active" href="#">About me</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Work Experience</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Skills</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Projects</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Articles</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Testimonials</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Contact</a>
+      </li>
+    </ul>
+  </div>
+
+  <!--Main content-->
+  <div class="container text-center">
+    <div class="container-one">
+      <div class="row align-items-start">
+        <div class="col-12 col-md-6 col-one">
+          <div class="content">
+            <p class="p-one">Hey, I am</p>
+            <p class="p-two">Suryansh</p>
+          </div>
+        </div>
+        <div class="ol-12 col-md-6 col-two">
+          <img src="static/images/me.png">
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer class="footer">
+  <p>&copy; 2024 Your Company</p>
+</footer>
+
+<script>
+  const starsContainer = document.querySelector('.stars');
+  const starCount =300;
+  for (let i = 0; i < starCount; i++) {
+      const star = document.createElement('div');
+      star.className = 'star';
+      star.style.width = star.style.height = `${Math.random() * 2}px`;
+      star.style.marginLeft = `${Math.random() * 1500}px`;
+      star.style.marginTop = `${Math.random() * 875}px`;
+      star.style.animationDelay = `${Math.random()}s`;
+      starsContainer.appendChild(star);
+  }
+
+  const shootsContainer = document.querySelector('.shoots');
+  const shootCount = 4;
+  for (let i = 0; i < shootCount; i++) {
+      const shoot = document.createElement('div');
+      shoot.className = 'shoot';
+      shoot.style.animationDelay = `${i * 0.01}s`;
+      shootsContainer.appendChild(shoot);
+  }
+</script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
