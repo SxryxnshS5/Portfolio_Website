@@ -7,8 +7,8 @@
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
   <link href="static/css/style.css" rel="stylesheet">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Azeret+Mono:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Azeret+Mono:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 </head>
 <body>
 <!-- Contains elements for the background-->
@@ -27,46 +27,74 @@
   <div class="sidebar">
     <ul class="nav flex-column nav-grp">
       <li class="nav-item">
-        <a class="nav-link active" href="#">About me</a>
+        <a class="nav-link active" href="#about-me">About me</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Work Experience</a>
+        <a class="nav-link" href="#work-experience">Work Experience</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Skills</a>
+        <a class="nav-link" href="#skills">Skills</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Projects</a>
+        <a class="nav-link" href="#projects">Projects</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Articles</a>
+        <a class="nav-link" href="#articles">Articles</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Testimonials</a>
+        <a class="nav-link" href="#testimonials">Testimonials</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Contact</a>
+        <a class="nav-link" href="#contact">Contact</a>
       </li>
     </ul>
   </div>
 
   <!--Main content-->
-  <div class="container text-center">
-    <div class="container-one">
-      <div class="row align-items-start">
-        <div class="col-12 col-md-6 col-one">
-          <div class="content">
-            <p class="p-one">Hey, I am</p>
-            <p class="p-two">Suryansh</p>
+  <div class="content">
+      <div id="about-me" class="container-one">
+        <div class="row align-items-start">
+          <div class="col-12 col-md-6 col-one">
+            <div class="text-one">
+              <p class="p-one">Hey! I am</p>
+              <p class="p-two">Suryansh.</p>
+              <p>I believe in having fun with every project I take on (you can probably tell I had a blast making 
+                this site, lol). I'm all about exploring new ideas, finding creative solutions, and staying curious 
+                (though I might be a bit laid-back at times, but I guarantee that I deliver high-quality work on time).</p>
+            </div>
+          </div>
+          <div class="col-12 col-md-6 col-two">
+            <img src="static/images/me.png">
           </div>
         </div>
-        <div class="ol-12 col-md-6 col-two">
-          <img src="static/images/me.png">
+      </div>
+
+
+      <div id="work-experience" class="container-two">
+        <div class="container">
+          <div class="row">
+            <div class="col-12 col-md-4 c2-col">
+              <p>col 1</p>
+            </div>
+            <div class="col-12 col-md-4 c2-col">
+              <p>col 2</p>
+            </div>
+            <div class="col-12 col-md-4 c2-col">
+              <p>col 3</p>
+            </div>
+            <div class="col-12 col-md-4 c2-col">
+              <p>col 4</p>
+            </div>
+            <div class="col-12 col-md-4 c2-col">
+              <p>col 5</p>
+            </div>
+            <div class="col-12 col-md-4 c2-col">
+              <p>col 6</p>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
   </div>
-
 </div>
 
 <footer class="footer">
@@ -75,7 +103,7 @@
 
 <script>
   const starsContainer = document.querySelector('.stars');
-  const starCount =300;
+  const starCount = 50;
   for (let i = 0; i < starCount; i++) {
       const star = document.createElement('div');
       star.className = 'star';
@@ -94,6 +122,51 @@
       shoot.style.animationDelay = `${i * 0.01}s`;
       shootsContainer.appendChild(shoot);
   }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const navLinks = document.querySelectorAll('.nav-link');
+    const sections = document.querySelectorAll('.content > div');
+    const sectionOffsets = Array.from(sections).map(section => section.offsetTop);
+
+    // Debounce function to limit the rate at which a function can fire
+    function debounce(func, wait) {
+      let timeout;
+      return function() {
+        const context = this, args = arguments;
+        clearTimeout(timeout);
+        timeout = setTimeout(() => func.apply(context, args), wait);
+      };
+    }
+
+    // Function to handle scroll event
+    const handleScroll = debounce(() => {
+      const scrollPosition = window.scrollY + 150; // Adjusted for some offset
+      navLinks.forEach((link, index) => {
+        if (scrollPosition >= sectionOffsets[index] && 
+            (index === sectionOffsets.length - 1 || scrollPosition < sectionOffsets[index + 1])) {
+          link.classList.add('active');
+        } else {
+          link.classList.remove('active');
+        }
+      });
+    }, 100);
+
+    window.addEventListener('scroll', handleScroll);
+
+    // Function to handle click event
+    navLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetId = link.getAttribute('href').substring(1);
+        document.getElementById(targetId).scrollIntoView({ behavior: 'smooth' });
+
+        setTimeout(() => {
+          navLinks.forEach(navLink => navLink.classList.remove('active'));
+          link.classList.add('active');
+        }, 300); // Slight delay to ensure the scroll is finished
+      });
+    });
+  });
 </script>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
